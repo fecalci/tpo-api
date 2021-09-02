@@ -1,24 +1,45 @@
 import logo from './logo.svg';
 import './App.css';
+import { ReactNavbar } from "react-responsive-animate-navbar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div
+    style={{ backgroundColor: "gray", minHeight: "100vh", width: "100%" }}
+  >
+    <ReactNavbar
+    color="rgb(25, 25, 25)"
+    logo="https://svgshare.com/i/KHh.svg"
+    menu={[
+      { name: "HOME", to: "/"},
+      { name: "ARTICLES", to: "/articles"},
+      { name: "ABOUT ME", to: "/about"},
+      { name: "CONTACT", to: "/contact"},
+    ]}
+    social={[
+      {
+        name: "Linkedin",
+        url: "https://www.linkedin.com/in/nazeh-taha/",
+        icon: ["fab", "linkedin-in"],
+      },
+      {
+        name: "Facebook",
+        url: "https://www.facebook.com/nazeh200/",
+        icon: ["fab", "facebook-f"],
+      },
+      {
+        name: "Instagram",
+        url: "https://www.instagram.com/nazeh_taha/",
+        icon: ["fab", "instagram"],
+      },
+      {
+        name: "Twitter",
+        url: "http://nazehtaha.herokuapp.com/",
+        icon: ["fab", "twitter"],
+      },
+    ]}
+  />
+  </div>
   );
 }
 
