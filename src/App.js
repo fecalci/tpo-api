@@ -1,11 +1,10 @@
 import './App.css';
-import NavBar from './navbar.js'
+import Routes from './routes';
 
 function App() {
   return (
-    <div
-    style={{ backgroundColor: "gray", minHeight: "100vh", width: "100%" }}>
-      <NavBar/>
+    <div>
+      <Routes/>
   </div>
   );
 }
