@@ -7,12 +7,10 @@ import PersonIcon from '@material-ui/icons/Person';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from './styles';
-import ServerConfig from '../../config/serverConfig';
-import handleResponse from '../utils/handleResponse';
-import swal500 from '../utils/swal500';
 import CircularProgress from "@material-ui/core/CircularProgress";
-import getCookie from "../utils/getCookie";
-import setCookie from "../utils/setCookie";
+import Swal from 'sweetalert2'
+// import getCookie from "../utils/getCookie";
+
 
 class Login extends Component {
     constructor(props) {
@@ -57,18 +55,18 @@ class Login extends Component {
         });
     };
 
-    handle401 = err => {
-        err.text().then(error => {
-            let errorObject = JSON.parse(error);
-            if (errorObject.code === "BAD_PASSWORD") {
-                this.setState({ errorpassword: errorObject.msg });
-            }
-            if (errorObject.code === "USER_NOT_FOUND") {
-                this.setState({ errorusername: errorObject.msg });
-            }
-        });
-        return Promise.reject(401);
-    };
+    // handle401 = err => {
+    //     err.text().then(error => {
+    //         let errorObject = JSON.parse(error);
+    //         if (errorObject.code === "BAD_PASSWORD") {
+    //             this.setState({ errorpassword: errorObject.msg });
+    //         }
+    //         if (errorObject.code === "USER_NOT_FOUND") {
+    //             this.setState({ errorusername: errorObject.msg });
+    //         }
+    //     });
+    //     return Promise.reject(401);
+    // };
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -77,56 +75,33 @@ class Login extends Component {
             this.setState(
                 { loading:true },
                 () => {
-                    fetch(`${ServerConfig.serverRoute}/session`, {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            username: username,
-                            password: password,
-                        })
-                    })
-                        .then(res => {
-                            return handleResponse(res, this.props, [{status: 401, method: this.handle401}]);
-                        })
-                        .then(data => {
-                            this.setState(
-                                { loading: false },
-                                () => {
-                                    setCookie("role", data.role);
-                                    setCookie("username", data.username);
-                                    setCookie("loggedGit", false);
-                                    window.localStorage.setItem('token', data.token);
-                                    if (data.role === "user")
-                                        this.props.history.push("/main");
-                                    else
-                                        this.props.history.push("/users");
+                        this.setState(
+                            { loading: false },
+                            () => {
+                                Swal.fire(
+                                    'Bienvenido!',
+                                    'Login realizado.',
+                                    'success'
+                            ).then(() => {
+                                this.props.history.push("/")
                                 });
-                        })
-                        .catch( err => {
-                            this.setState(
-                                { loading: false },
-                                () => {
-                                    swal500(err);
-                                });
+                            });
                         });
-                });
-        } else {
+            } 
+        else {
             this.emptyInputs();
         }
     };
 
-    componentDidMount() {
-        if (window.localStorage.getItem('token')) {
-            const role = getCookie("role");
-            if (role === "user")
-                this.props.history.push('/main');
-            else
-                this.props.history.push('/users');
-        }
-    };
+    // componentDidMount() {
+    //     if (window.localStorage.getItem('token')) {
+    //         const role = getCookie("role");
+    //         if (role === "user")
+    //             this.props.history.push('/main');
+    //         else
+    //             this.props.history.push('/users');
+    //     }
+    // };
 
     render(){
         return (

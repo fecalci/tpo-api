@@ -108,7 +108,6 @@ class SignUp extends Component{
                                         'Su usuario ha sido registrado correctamente.',
                                         'success'
                                 ).then(() => {
-                                    console.log('router');
                                     this.props.history.push("/main")
                                     });
                                 });
@@ -199,7 +198,7 @@ class SignUp extends Component{
                     </form>
                     <Typography className={this.props.classes.link}>
                         ¿Ya estás registrado? {this.state.smallScreen ? <br /> : ' '}
-                        <Link to='/' style={{color: "blue", fontVariant: "underline"}}>
+                        <Link to='/login' style={{color: "blue", fontVariant: "underline"}}>
                             Ingresá a tu cuenta aquí
                         </Link>
                     </Typography>
