@@ -7,13 +7,10 @@ import styles from './styles';
 import Button from "@material-ui/core/Button";
 import KeyIcon from '@material-ui/icons/VpnKey';
 import PersonIcon from '@material-ui/icons/Person';
-import CustomInput from '../CustomInput';
-import ServerConfig from "../../config/serverConfig";
-import handleResponse from "../utils/handleResponse";
-import swal500 from "../utils/swal500";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Swal from 'sweetalert2';
 import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
+import CustomInput from '../CustomInput'
 
 class SignUp extends Component{
     constructor(props){
@@ -72,18 +69,18 @@ class SignUp extends Component{
         }
     };
 
-    handle400 = err => {
-        err.text().then(error => {
-            let errorObject = JSON.parse(error);
-            if (errorObject.code === "BAD_PASSWORD") {
-                this.setState({ errorpassword: errorObject.msg });
-            }
-            if (errorObject.code === "BAD_USERNAME") {
-                this.setState({ errorusername: errorObject.msg });
-            }
-        });
-        return Promise.reject(401);
-    };
+    // handle400 = err => {
+    //     err.text().then(error => {
+    //         let errorObject = JSON.parse(error);
+    //         if (errorObject.code === "BAD_PASSWORD") {
+    //             this.setState({ errorpassword: errorObject.msg });
+    //         }
+    //         if (errorObject.code === "BAD_USERNAME") {
+    //             this.setState({ errorusername: errorObject.msg });
+    //         }
+    //     });
+    //     return Promise.reject(401);
+    // };
 
     handleChange = e => {
         const { name, value } = e.target;
@@ -102,41 +99,19 @@ class SignUp extends Component{
         if (username !== '' && password !== '' && passwordRepetida !== '' && this.noErrors()) {
             this.setState(
                 { loading:true },
-                () => {
-                    fetch(`${ServerConfig.serverRoute}/users`, {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            username: username,
-                            password: password,
-                        })
-                    })
-                        .then(res => {
-                            return handleResponse(res, this.props, [{status: 400, method: this.handle400}]);
-                        })
-                        .then(data => {
-                            this.setState(
-                                { loading: false },
-                                () => {
-                                    Swal.fire(
+                () => {//aca iria el post y abajo en el () iria data
+                    this.setState(
+                        { loading: false },
+                        () => {
+                                Swal.fire(
                                         'Registrado!',
                                         'Su usuario ha sido registrado correctamente.',
                                         'success'
-                                    ).then(() => {
-                                        this.props.history.push("/")
+                                ).then(() => {
+                                    console.log('router');
+                                    this.props.history.push("/main")
                                     });
                                 });
-                        })
-                        .catch( err => {
-                            this.setState(
-                                { loading: false },
-                                () => {
-                                    swal500(err);
-                                });
-                        });
                 });
         } else {
             this.emptyInputs();
