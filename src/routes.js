@@ -5,6 +5,7 @@ import Main from "./components/main";
 // import Login from './components/Login/Login';
 // import SignUp from './components/SignUp/SignUp';
 // import Main from './components/navbar'
+
 const Routes= () => (
     <BrowserRouter>
         <Switch>
