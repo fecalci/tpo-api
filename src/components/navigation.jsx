@@ -16,7 +16,7 @@ export const Navigation = (props) => {
               <span className='icon-bar'></span>{' '}
             </button>
             <a className='navbar-brand page-scroll' href='#page-top'>
-              Calcitanium Pediatría
+            Cal Pediatría
             </a>{' '}
           </div>
   
@@ -35,6 +35,16 @@ export const Navigation = (props) => {
                   Percentiles
                 </a>
               </li>
+              <li>
+                <a href='/registro' className='page-scroll'>
+                  Control Pediatrico 
+                </a>
+              </li>  
+              <li>
+                <a href='/vacreg' className='page-scroll'>
+                  Vacunacion
+                </a>
+              </li>  
               <li>
                 <a href='#contact' className='page-scroll'>
                   Contacto

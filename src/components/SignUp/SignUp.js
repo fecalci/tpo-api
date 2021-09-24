@@ -17,8 +17,16 @@ class SignUp extends Component{
         super(props);
         this.state = {
             username: '',
+            apellido:'',
+            mail:'',
+            telefono:'',
+            dni:'',
             password: '',
             passwordRepetida: '',
+            errorapellido:'',
+            errormail:'',
+            errortelefono:'',
+            errordni:'',
             errorusername: '',
             errorpassword: '',
             errorpasswordRepetida: '',
@@ -48,7 +56,11 @@ class SignUp extends Component{
         this.setState({
             errorusername: '',
             errorpassword: '',
-            errorpasswordRepetida: ''
+            errorpasswordRepetida: '',
+            errorapellido:'',
+            errormail:'',
+            errortelefono:'',
+            errordni:'',
         });
     };
 
@@ -57,7 +69,7 @@ class SignUp extends Component{
     };
 
     emptyInputs = () => {
-        const {username, password, passwordRepetida} = this.state;
+        const {username, password, passwordRepetida,dni,apellido,mail,telefono} = this.state;
         if (username === '') {
             this.setState({errorusername: "Complete el nombre de usuario"});
         }
@@ -66,6 +78,18 @@ class SignUp extends Component{
         }
         if (passwordRepetida === '') {
             this.setState({errorpasswordRepetida: "Repita la contraseña"});
+        }
+        if (dni === '') {
+            this.setState({errorpasswordRepetida: "Complete el dni"});
+        }
+        if (apellido === '') {
+            this.setState({errorpasswordRepetida: "Complete el apellido"});
+        }
+        if (mail === '') {
+            this.setState({errorpasswordRepetida: "Complete el mail"});
+        }
+        if (telefono === '') {
+            this.setState({errorpasswordRepetida: "Complete el telefono"});
         }
     };
 
@@ -95,7 +119,7 @@ class SignUp extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const {username, password, passwordRepetida} = this.state;
+        const {username, password, passwordRepetida,dni,apellido,mail,telefono} = this.state;
         if (username !== '' && password !== '' && passwordRepetida !== '' && this.noErrors()) {
             this.setState(
                 { loading:true },
@@ -155,10 +179,54 @@ class SignUp extends Component{
                     <form className={this.props.classes.form}>
                         <div className={this.props.classes.inputSignUp}>
                             <CustomInput
-                                label="Usuario"
+                                label="Nombre"
                                 value={this.state.username}
                                 handleChange={this.handleChange}
                                 name="username"
+                                error={this.state.errorusername}
+                                autoFocus
+                                icon={<PersonIcon className={this.props.classes.icon}/>}
+                            />
+                        </div>
+                        <div className={this.props.classes.inputSignUp}>
+                            <CustomInput
+                                label="Apellido"
+                                value={this.state.username}
+                                handleChange={this.handleChange}
+                                name="username"
+                                error={this.state.errorusername}
+                                autoFocus
+                                icon={<PersonIcon className={this.props.classes.icon}/>}
+                            />
+                        </div>
+                        <div className={this.props.classes.inputSignUp}>
+                            <CustomInput
+                                label="Mail"
+                                value={this.state.username}
+                                handleChange={this.handleChange}
+                                name="username"
+                                error={this.state.errorusername}
+                                autoFocus
+                                icon={<PersonIcon className={this.props.classes.icon}/>}
+                            />
+                        </div>
+                        <div className={this.props.classes.inputSignUp}>
+                            <CustomInput
+                                label="Dni"
+                                value={this.state.username}
+                                handleChange={this.handleChange}
+                                name="username"
+                                error={this.state.errorusername}
+                                autoFocus
+                                icon={<PersonIcon className={this.props.classes.icon}/>}
+                            />
+                        </div>
+                        <div className={this.props.classes.inputSignUp}>
+                            <CustomInput
+                                label="Nombre"
+                                value={this.state.username}
+                                handleChange={this.handleChange}
+                                name="Numero de Telefono"
                                 error={this.state.errorusername}
                                 autoFocus
                                 icon={<PersonIcon className={this.props.classes.icon}/>}
@@ -200,6 +268,12 @@ class SignUp extends Component{
                         ¿Ya estás registrado? {this.state.smallScreen ? <br /> : ' '}
                         <Link to='/login' style={{color: "blue", fontVariant: "underline"}}>
                             Ingresá a tu cuenta aquí
+                        </Link>
+                    </Typography>
+                    <Typography className={this.props.classes.link}>
+                        ¿Olvidaste tu constraseña? {this.state.smallScreen ? <br /> : ' '}
+                        <Link to='/login' style={{color: "blue", fontVariant: "underline"}}>
+                            Ingresa aquí
                         </Link>
                     </Typography>
                     </Paper>
