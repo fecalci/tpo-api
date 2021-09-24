@@ -1,4 +1,4 @@
-import {Component, Button} from 'react';
+import {Component} from 'react';
 import Table from 'react-bootstrap/Table';
 import JsonData from '../data/vaccineData.json';
 import Swal from 'sweetalert2';
