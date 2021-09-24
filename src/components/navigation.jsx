@@ -51,6 +51,11 @@ export const Navigation = (props) => {
                 </a>
               </li>
               <li>
+                <a href='/vacreg' className='page-scroll'>
+                  Calendario
+                </a>
+              </li>
+              <li>
                 <a href='/login' className='page-scroll'>
                   Ingresar
                 </a>
