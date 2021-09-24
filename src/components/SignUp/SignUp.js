@@ -270,6 +270,12 @@ class SignUp extends Component{
                             Ingresá a tu cuenta aquí
                         </Link>
                     </Typography>
+                    <Typography className={this.props.classes.link}>
+                        ¿Olvidaste tu constraseña? {this.state.smallScreen ? <br /> : ' '}
+                        <Link to='/login' style={{color: "blue", fontVariant: "underline"}}>
+                            Ingresa aquí
+                        </Link>
+                    </Typography>
                     </Paper>
                 </Grid>
             </div>
