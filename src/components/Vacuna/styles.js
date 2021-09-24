@@ -2,7 +2,9 @@ import lightBlue from '@material-ui/core/colors/lightBlue';
 
 const styles = theme => ({
     background: {
-        backgroundColor: '#eeeeee',
+        backgroundColor: lightBlue[700],
+        width:'100%',
+        height:'100%'
         //backgroundColor: '#c6d6d8',
     },
     
@@ -16,8 +18,8 @@ const styles = theme => ({
         margin:theme.spacing(1),
     },
     paperForm: {
-        margin:theme.spacing(10),
-        padding:theme.spacing(3),
+        margin:theme.spacing(2),
+        padding:theme.spacing(1),
     },
 
     paper: {
@@ -54,11 +56,27 @@ const styles = theme => ({
         color: "grey"
     },
     title: {
-        marginBottom: 15,
+        marginBottom: 25,
         color: '#20485d',
         marginTop: 10,
-        fontSize: 30,
+        fontSize: 25,
         textAlign: 'center'
+    },
+    titleform: {
+        marginBottom: 5,
+        color: '#20485d',
+        marginTop: 10,
+        marginLeft:10,
+        fontSize: 10,
+        textAlign: 'left'
+    },
+    titleformpading: {
+        marginBottom: 5,
+        color: '#20485d',
+        marginTop: 40,
+        marginLeft:10,
+        fontSize: 10,
+        textAlign: 'left'
     },
     link:{
         marginTop: 15,
