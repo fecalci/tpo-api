@@ -7,6 +7,7 @@ import SignUp from './components/SignUp/SignUp';
 import LineChart from './components/Graphs/LineChar'
 import Vacuna from './components/Vacuna/Vacuna'
 // import Main from './components/navbar'
+
 const Routes= () => (
     <BrowserRouter>
         <Switch>
