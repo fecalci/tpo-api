@@ -1,0 +1,47 @@
+import { merge } from 'lodash';
+import ReactApexChart from 'react-apexcharts';
+// material
+import { Box, Card, CardHeader } from '@mui/material';
+// utils
+import { fNumber } from '../../../utils/formatNumber';
+//
+import { BaseOptionChart } from '../../charts';
+
+// ----------------------------------------------------------------------
+
+const CHART_DATA = [{ data: [1, 2, 3, 1, 1] }];
+
+export default function AppConversionRates() {
+  const chartOptions = merge(BaseOptionChart(), {
+    tooltip: {
+      marker: { show: false },
+      y: {
+        formatter: (seriesName) => fNumber(seriesName),
+        title: {
+          formatter: (seriesName) => `#${seriesName}`
+        }
+      }
+    },
+    plotOptions: {
+      bar: { horizontal: true, barHeight: '28%', borderRadius: 2 }
+    },
+    xaxis: {
+      categories: [
+        'BCG',
+        'Varicela',
+        'IPV',
+        'Rotavirus',
+        'Triple Viral (5)'
+      ]
+    }
+  });
+
+  return (
+    <Card>
+      <CardHeader title="Vacunas recibidas" subheader="(+43%) más que el año pasado" />
+      <Box sx={{ mx: 3 }} dir="ltr">
+        <ReactApexChart type="bar" series={CHART_DATA} options={chartOptions} height={364} />
+      </Box>
+    </Card>
+  );
+}
