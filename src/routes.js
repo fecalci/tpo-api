@@ -5,8 +5,7 @@ import Main from "./components/main";
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import LineChart from './components/Graphs/LineChar'
-import Vacuna from "./components/Vacuna/Vacuna";
-import ClippedDrawer from './components/Vacuna/MiniDrawer'
+import Registro from "./components/Registro/Registro";
 // import Main from './components/navbar'
 
 const Routes= () => (
@@ -16,8 +15,7 @@ const Routes= () => (
             <Route exact path="/login" component={Login} /> 
             <Route exact path="/signup" component={SignUp} /> 
             <Route exact path="/char" component={LineChart} /> 
-            <Route exact path="/vacunas" component={Vacuna} /> 
-            <Route exact path="/input" component={ClippedDrawer} /> 
+            <Route exact path="/registro" component={Registro} /> 
 
         </Switch>
     </BrowserRouter>

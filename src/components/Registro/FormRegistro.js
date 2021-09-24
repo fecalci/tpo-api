@@ -7,7 +7,7 @@ import DatePicker from './Datepicker';
 import { IconButton} from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove'
 import AddIcon from '@material-ui/icons/Add'
-class FormVacunas extends Component{
+class FormRegristo extends Component{
 
     constructor(props){
         super(props);
@@ -290,4 +290,4 @@ class FormVacunas extends Component{
         );
     }
 }
-export default withStyles(styles)(FormVacunas);
+export default withStyles(styles)(FormRegristo);

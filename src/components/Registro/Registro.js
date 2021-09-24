@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import FormVacunas from './FormVacunas';
+import FormRegristo from './FormRegistro';
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from './styles';
 import {Paper,Typography,Grid} from '@material-ui/core'
@@ -21,7 +21,7 @@ import {indigo,grey} from '@material-ui/core/colors/';
 
 const drawerWidth = 240;
 
-class Vacunas extends Component{
+class Registro extends Component{
 
     constructor(props){
         super(props);
@@ -92,11 +92,11 @@ class Vacunas extends Component{
                         >
                         Registro de Control Pediatrico
                         </Typography>
-                        <FormVacunas/>
+                        <FormRegristo/>
                 </Box>
             </Box>
         </div>
         );
     }
 }
-export default withStyles(styles)(Vacunas)
+export default withStyles(styles)(Registro)
