@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import Main from "./components/main";
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
-import LineChart from './components/Graphs/LineChar'
 import Registro from "./components/Registro/Registro";
 import LineChart from './components/Graphs/LineChar';
 import VaccineRegister from './components/VaccineRegister';
