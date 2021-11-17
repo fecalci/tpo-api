@@ -145,7 +145,7 @@ class Login extends Component {
                             <CustomInput
                                 error={this.state.errorusername}
                                 name="username"
-                                label="Usuario"
+                                label="Email"
                                 type="text"
                                 handleChange={this.handleChange}
                                 value={this.state.username}

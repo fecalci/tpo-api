@@ -54,13 +54,13 @@ class SignUp extends Component{
 
     errorReset = () => {
         this.setState({
-            errorusername: '',
-            errorpassword: '',
-            errorpasswordRepetida: '',
             errorapellido:'',
             errormail:'',
             errortelefono:'',
             errordni:'',
+            errorusername: '',
+            errorpassword: '',
+            errorpasswordRepetida: '',
         });
     };
 
@@ -80,16 +80,16 @@ class SignUp extends Component{
             this.setState({errorpasswordRepetida: "Repita la contraseña"});
         }
         if (dni === '') {
-            this.setState({errorpasswordRepetida: "Complete el dni"});
+            this.setState({errordni: "Complete el dni"});
         }
         if (apellido === '') {
-            this.setState({errorpasswordRepetida: "Complete el apellido"});
+            this.setState({errorapellido: "Complete el apellido"});
         }
         if (mail === '') {
-            this.setState({errorpasswordRepetida: "Complete el mail"});
+            this.setState({errormail: "Complete el mail"});
         }
         if (telefono === '') {
-            this.setState({errorpasswordRepetida: "Complete el telefono"});
+            this.setState({errortelefono: "Complete el telefono"});
         }
     };
 
@@ -132,7 +132,7 @@ class SignUp extends Component{
                                         'Su usuario ha sido registrado correctamente.',
                                         'success'
                                 ).then(() => {
-                                    this.props.history.push("/main")
+                                    this.props.history.push("/registrohijo")
                                     });
                                 });
                 });
@@ -191,10 +191,10 @@ class SignUp extends Component{
                         <div className={this.props.classes.inputSignUp}>
                             <CustomInput
                                 label="Apellido"
-                                value={this.state.username}
+                                value={this.state.apellido}
                                 handleChange={this.handleChange}
-                                name="username"
-                                error={this.state.errorusername}
+                                name="apellido"
+                                error={this.state.errorapellido}
                                 autoFocus
                                 icon={<PersonIcon className={this.props.classes.icon}/>}
                             />
@@ -202,10 +202,10 @@ class SignUp extends Component{
                         <div className={this.props.classes.inputSignUp}>
                             <CustomInput
                                 label="Mail"
-                                value={this.state.username}
+                                value={this.state.mail}
                                 handleChange={this.handleChange}
-                                name="username"
-                                error={this.state.errorusername}
+                                name="mail"
+                                error={this.state.errormail}
                                 autoFocus
                                 icon={<PersonIcon className={this.props.classes.icon}/>}
                             />
@@ -213,21 +213,21 @@ class SignUp extends Component{
                         <div className={this.props.classes.inputSignUp}>
                             <CustomInput
                                 label="Dni"
-                                value={this.state.username}
+                                value={this.state.dni}
                                 handleChange={this.handleChange}
-                                name="username"
-                                error={this.state.errorusername}
+                                name="dni"
+                                error={this.state.errordni}
                                 autoFocus
                                 icon={<PersonIcon className={this.props.classes.icon}/>}
                             />
                         </div>
                         <div className={this.props.classes.inputSignUp}>
                             <CustomInput
-                                label="Nombre"
-                                value={this.state.username}
+                                label="Numero de Telefono"
+                                value={this.state.telefono}
                                 handleChange={this.handleChange}
-                                name="Numero de Telefono"
-                                error={this.state.errorusername}
+                                name="telefono"
+                                error={this.state.errortelefono}
                                 autoFocus
                                 icon={<PersonIcon className={this.props.classes.icon}/>}
                             />
