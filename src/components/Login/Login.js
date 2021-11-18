@@ -9,20 +9,49 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import styles from './styles';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Swal from 'sweetalert2'
-// import getCookie from "../utils/getCookie";
-
+import {login} from '../../controllers/loginController'
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
+            email: '',
             password: '',
             loading: false,
+            usuarioValido:false,
             errorusername: '',
             errorpassword: '',
-        };
+        };        
     }
+
+    validarLogin= async function()
+{
+    let datos = {
+      email: this.state.email,
+      password: this.state.password
+    }
+    let getLogin = await login(datos);
+    if (getLogin.rdo===0 )
+    {
+      this.state.usuarioValido=true
+      this.props.history.push("/")
+    }
+    if (getLogin.rdo===1)
+    {
+      alert(getLogin.mensaje)
+    }
+    
+}
+
+    loginUser=()=>
+        {
+        if (this.state.email!=="" && this.state.password!=="")
+        {
+            this.validarLogin();
+        }
+            
+        }
+        
 
     errorReset = () => {
         this.setState({
@@ -32,8 +61,8 @@ class Login extends Component {
     };
 
     emptyInputs = () => {
-        const { username, password } = this.state;
-        if (username === '') 
+        const { email, password } = this.state;
+        if (email === '') 
             this.setState({ errorusername: 'Complete el nombre de usuario' });
         
         if (password === '') 
@@ -70,8 +99,8 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const {username, password} = this.state;
-        if (!(username === '' || password === '')) {
+        if (this.state.usuarioValido) {
+            alert("ESTA OK");
             this.setState(
                 { loading:true },
                 () => {
@@ -144,11 +173,11 @@ class Login extends Component {
                         <div className={this.props.classes.inputLogin}>
                             <CustomInput
                                 error={this.state.errorusername}
-                                name="username"
+                                name="email"
                                 label="Usuario"
                                 type="text"
                                 handleChange={this.handleChange}
-                                value={this.state.username}
+                                value={this.state.email}
                                 icon={<PersonIcon style={{marginRight: 5, color: "grey"}}/>}
                             />
                         </div>
@@ -169,6 +198,7 @@ class Login extends Component {
                             type="submit"
                             style={{ marginTop: 20 }}
                             className={this.props.classes.signInButton}
+                            onClick={this.loginUser}
                         >
                             Iniciar sesión
                         </Button>

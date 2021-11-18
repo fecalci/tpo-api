@@ -38,7 +38,7 @@ function NewsItem({ news }) {
         component="img"
         alt={title}
         src={image}
-        sx={{ width: 48, height: 48, borderRadius: 1.5 }}
+        sx={{ width: 88, height: 88, borderRadius: 1.5 }}
       />
       <Box sx={{ minWidth: 240 }}>
         <Link to="#" color="inherit" underline="hover" component={RouterLink}>
