@@ -16,11 +16,14 @@ class VaccineRegister extends Component {
         e.preventDefault();
         Swal.fire({
             title: 'Registremos tu vacuna!',
-            input: 'text',
-            inputLabel:'Ingrese la fecha',
-            inputAttributes: {
-              autocapitalize: 'off'
-            },
+            html:
+            '<input id="swal-input1" class="swal2-input" placeholder="Ingrese la fecha">' +
+            '<input id="swal-input2" class="swal2-input" placeholder="Ingrese el centro">',
+            // input: 'text',
+            // inputLabel:'Ingrese la fecha',            
+            // inputAttributes: {
+            //   autocapitalize: 'off'
+            // },
             showCancelButton: true,
             cancelButtonText:'Cancelar',
             confirmButtonText: 'Confirmar',
