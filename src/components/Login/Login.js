@@ -10,6 +10,7 @@ import styles from './styles';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Swal from 'sweetalert2'
 import {login} from '../../controllers/loginController'
+import {getBebesByUser} from '../../controllers/registerBebeController'
 
 class Login extends Component {
     constructor(props) {
@@ -33,8 +34,11 @@ class Login extends Component {
     let getLogin = await login(datos);
     if (getLogin.rdo===0 )
     {
+      
+      let getBebes = await getBebesByUser();
       this.state.usuarioValido=true
       this.props.history.push("/")
+
     }
     if (getLogin.rdo===1)
     {

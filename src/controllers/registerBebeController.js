@@ -150,19 +150,16 @@ export const uploadFileImg= async function(files,nombres)
         console.log('Error uploading the files', err)
     }
 }
-export const getImagenesByUser = async function()
+export const getBebesByUser = async function()
 {
-    //url webservices
-    let url = urlWebServices.getImgUser;
-    //console.log("url",url);
-    //console.log("token",WebToken.webToken);
+    let url = urlWebServices.getBebesInicio;
     const formData = new URLSearchParams();
     formData.append('email', localStorage.getItem('email'));
     
     try
     {
         let response = await fetch(url,{
-            method: 'POST', // or 'PUT'
+            method: 'PUT', // or 'PUT'
             mode: "cors",
             headers:{
                 'Accept':'application/x-www-form-urlencoded',
@@ -175,13 +172,58 @@ export const getImagenesByUser = async function()
         {
             let data = await response.json();
             console.log("imagenesUser",data);
-            let listaImg = data.data.docs;
-            return listaImg;
+            let listaBebe = data.data.docs;
+            let nombres= []
+            const nombre= listaBebe.map((bebe) => {
+                nombres.push(bebe.name)
+            })
+            localStorage.setItem("Bebes",JSON.stringify(nombres));
+            return listaBebe;
         }
         else
         {
             let vacio=[];
-            console.log("No hay imagenes")
+            console.log("No hay bebes")
+            return (vacio);
+            
+        }
+    }
+    catch(error)
+    {
+        console.log("error",error);
+    };
+}
+
+export const getBebesByUserAndName = async function(datos)
+{
+    let url = urlWebServices.getBebesInicio;
+    const formData = new URLSearchParams();
+    formData.append('email', localStorage.getItem('email'));
+    formData.append('bebe', datos.bebe);  
+    try
+    {
+        let response = await fetch(url,{
+            method: 'PUT', // or 'PUT'
+            mode: "cors",
+            headers:{
+                'Accept':'application/x-www-form-urlencoded',
+                'x-access-token': localStorage.getItem('x'),
+                'Origin':'http://localhost:3000',
+                'Content-Type': 'application/x-www-form-urlencoded'},
+            body:formData
+        });
+        if (response.status===200)
+        {
+            let data = await response.json();
+            console.log("Traemos Bebe DATA",data);
+            let listaBebe = data.data.docs;
+            localStorage.setItem("ActualBebe",JSON.stringify(listaBebe));
+            return listaBebe;
+        }
+        else
+        {
+            let vacio=[];
+            console.log("No hay bebes")
             return (vacio);
             
         }

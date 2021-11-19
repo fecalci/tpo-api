@@ -1,8 +1,38 @@
 import { BrokenImageTwoTone } from "@material-ui/icons";
-import React from "react";
+import React,{useState} from "react";
 import Button from "@material-ui/core/Button/index";
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import {getBebesByUserAndName} from '../controllers/registerBebeController'
 
 export const Navigation = (props) => {
+  const [value,setValue]=useState("")
+  const hijos = JSON.parse(localStorage.getItem('Bebes'))
+  //console.log(hijos)
+
+  const handleChange=e=>setValue(e) 
+
+  function handleChange2(e){
+    handleChange(e)    
+    let datos = {
+      email: localStorage.getItem("email"),
+      bebe: e.target.value
+    }
+    traerBebeSeleccionado(datos);
+    console.log(`Option selected:`, e.target.value);
+}
+
+
+ const traerBebeSeleccionado= async function(datos)
+
+  {
+  let getbebe = await getBebesByUserAndName(datos);
+    
+  }
+
   //alert(localStorage.getItem('email'));
   if (localStorage.getItem('email')){
     console.log("LOCAL",localStorage.getItem('email'));
@@ -55,6 +85,21 @@ export const Navigation = (props) => {
               <a href='/profile' className='page-scroll'>
                 Perfil
               </a>
+            </li> 
+            <li>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"        
+                onChange={handleChange2}
+                value={value}
+              >
+                
+                {hijos.map((option) => (
+                <MenuItem key={option} value={option}>
+                {option}
+                </MenuItem>
+                ))}
+              </Select>
             </li>    
             <li>
             <a href='/' className='page-scroll' onClick={() => { localStorage.clear() }}>
