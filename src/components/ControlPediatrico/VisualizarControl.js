@@ -32,12 +32,20 @@ class controlVisualizar extends Component{
         
         handleItemList = (item) => {
             let contr= JSON.parse(localStorage.getItem('ControlesFull'))
-            contr.map((control) => {
-                if (item.toString()==control.fecha_control.toString()) {
-                    localStorage.setItem("ActualControl",JSON.stringify(control));
+            contr.map((data) => {
+                if (item.toString()==data.fecha_control.toString()) {
+                        localStorage.setItem("fecha_control",JSON.stringify(data.fecha_control));
+                        localStorage.setItem("altura",JSON.stringify(data.altura));
+                        localStorage.setItem("peso",JSON.stringify(data.peso));
+                        localStorage.setItem("cabeza",JSON.stringify(data.cabeza));
+                        localStorage.setItem("medicamento",JSON.stringify(data.medicamento));
+                        localStorage.setItem("observacion",JSON.stringify(data.observacion));
+                        localStorage.setItem("estudio",JSON.stringify(data.estudio));
+                        localStorage.setItem("resultado",JSON.stringify(data.resultado));
                     //alert(this.state.altura)
                 }
             })
+            window.location.reload(false)
         };
         
     render(){
@@ -98,7 +106,8 @@ class controlVisualizar extends Component{
                         >
                         Registro de Control Pediatrico
                         </Typography>
-
+                    <Grid container>
+                        <Grid item xs={6}>
                         <Typography
                         component="h1"
                         variant="h10"
@@ -139,6 +148,9 @@ class controlVisualizar extends Component{
                         Altura: {localStorage.getItem('altura')}
                         </Typography>
 
+                        </Grid>
+
+                        <Grid item xs={6}>
                         <Typography
                         component="h1"
                         variant="h10"
@@ -178,6 +190,8 @@ class controlVisualizar extends Component{
                         >
                         Resultado: {localStorage.getItem('resultado')}
                         </Typography>
+                        </Grid>
+                    </Grid>
                 </Box>
             </Box>
         </div>
