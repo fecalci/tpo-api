@@ -35,7 +35,7 @@ class Login extends Component {
     if (getLogin.rdo===0 )
     {
       
-      //let getBebes = await getBebesByUser();
+      let getBebes = await getBebesByUser();
       this.state.usuarioValido=true
       this.props.history.push("/")
 

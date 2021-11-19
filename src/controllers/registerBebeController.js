@@ -159,11 +159,11 @@ export const getBebesByUser = async function()
     try
     {
         let response = await fetch(url,{
-            method: 'POST', // or 'PUT'
+            method: 'PUT', // or 'PUT'
             mode: "cors",
             headers:{
                 'Accept':'application/x-www-form-urlencoded',
-                //'x-access-token': localStorage.getItem('x'),
+                'x-access-token': localStorage.getItem('x'),
                 'Origin':'http://localhost:3000',
                 'Content-Type': 'application/x-www-form-urlencoded'},
             body:formData
@@ -172,8 +172,12 @@ export const getBebesByUser = async function()
         {
             let data = await response.json();
             console.log("imagenesUser",data);
-            let listaBebe = data.data.name;
-            localStorage.setItem("Bebes",listaBebe);
+            let listaBebe = data.data.docs;
+            let nombres= []
+            const nombre= listaBebe.map((bebe) => {
+                nombres.push(bebe.name)
+            })
+            localStorage.setItem("Bebes",JSON.stringify(nombres));
             return listaBebe;
         }
         else
