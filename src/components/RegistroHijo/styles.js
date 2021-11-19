@@ -82,6 +82,9 @@ const styles = theme => ({
         marginTop: 15,
         textAlign: "center",
         fontSize: 14,
+    },
+    gridinline:{
+        marginLeft:500
     }
 });
 

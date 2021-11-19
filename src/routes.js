@@ -9,7 +9,7 @@ import LineChart from './components/Graphs/LineChar';
 import VaccineRegister from './components/VaccineRegister';
 import DashboardApp from './components/DashboardApp'
 import Dashboard from './components/Dashboard'
-import RegistroHijo from './components/RegistroHijo/Registro'
+import RegistroHijo from './components/RegistroHijo/FormRegistro'
 
 const Routes= () => (
     <BrowserRouter>

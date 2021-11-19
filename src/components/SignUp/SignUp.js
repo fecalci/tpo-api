@@ -11,6 +11,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import CustomInput from '../CustomInput'
+import {register} from '../../controllers/registerController'
 
 class SignUp extends Component{
     constructor(props){
@@ -33,6 +34,26 @@ class SignUp extends Component{
             loading: false,
             smallScreen: false,
         };
+    }
+    validarRegister= async function(){
+        let datos = {
+          email: this.state.mail,
+          password: this.state.password,
+          passwordRepetida:this.state.passwordRepetida,
+          telefono:this.state.telefono,
+          dni:this.state.dni,
+          name:this.state.username
+        }
+        let getRegister = await register(datos);
+        if (getRegister.rdo===0 )
+        {
+          this.props.history.push("/registrohijo")
+        }
+        if (getRegister.rdo===1)
+        {
+          alert(getRegister.mensaje)
+        }
+        
     }
 
     componentDidMount() {
@@ -121,22 +142,8 @@ class SignUp extends Component{
         e.preventDefault();
         const {username, password, passwordRepetida,dni,apellido,mail,telefono} = this.state;
         if (username !== '' && password !== '' && passwordRepetida !== '' && this.noErrors()) {
-            this.setState(
-                { loading:true },
-                () => {//aca iria el post y abajo en el () iria data
-                    this.setState(
-                        { loading: false },
-                        () => {
-                                Swal.fire(
-                                        'Registrado!',
-                                        'Su usuario ha sido registrado correctamente.',
-                                        'success'
-                                ).then(() => {
-                                    this.props.history.push("/registrohijo")
-                                    });
-                                });
-                });
-        } else {
+            this.validarRegister() // Llama a funcion para ir al controller
+            } else {
             this.emptyInputs();
         }
     };
