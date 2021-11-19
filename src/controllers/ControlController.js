@@ -1,20 +1,21 @@
 import urlWebServices from './webServices';
 
-export const registerBebe= async function(datas)
+export const registerControl= async function(datas)
 {
     //url webservices
-    let url = urlWebServices.registerBebe;
+    let url = urlWebServices.registerControl;
     //armo json con datos
+    const nameBebe= localStorage.getItem('ActualBebe')
     const formData = new URLSearchParams();
-    formData.append('fecha', datas.fecha);
+    formData.append('fecha_control', datas.fecha_control);
     formData.append('altura', datas.altura);
     formData.append('peso', datas.peso)
     formData.append('cabeza', datas.cabeza)
-    formData.append('name', datas.name)
-    formData.append('sangre', datas.sangre);
-    formData.append('alergias', datas.alergias);
-    formData.append('enfermedad', datas.enfermedad)
-    formData.append('sexo', datas.sexo)
+    formData.append('name', localStorage.getItem('ActualBebeName'))
+    formData.append('resultado', datas.resultado)
+    formData.append('observacion', datas.observacion);
+    formData.append('medicamento', datas.medicamento)
+    formData.append('estudio', datas.estudio)
     formData.append('email',localStorage.getItem('email'))
     try
     {
@@ -29,7 +30,6 @@ export const registerBebe= async function(datas)
             body: formData,
             
         });
-        
         let rdo = response.status;
         console.log("response",response);
         let data = await response.json();
@@ -39,18 +39,19 @@ export const registerBebe= async function(datas)
                 case 201:
                 {
                     //guardo token
-                    localStorage.setItem("x",data.createdBebe.token);
+                    localStorage.setItem("x",data.createdControl.token);
                     //guardo usuario logueado
-                    let user = data.createdBebe.user;
-                    localStorage.setItem("sexo",user.sexo);
-                    localStorage.setItem("name",user.name);
-                    localStorage.setItem("enfermedad",user.enfermedad);
-                    localStorage.setItem("alergias",user.alergias);
-                    localStorage.setItem("fecha",user.fecha);
-                    localStorage.setItem("altura",user.altura);
-                    localStorage.setItem("peso",user.peso);
-                    localStorage.setItem("cabeza",user.cabeza);
-                    localStorage.setItem("sangre",user.sangre);
+                    let user = data.createdControl.user;
+                    console.log('llegue Aca1')
+                    localStorage.setItem("fecha_control",datas.fecha_control);
+                    localStorage.setItem("altura",datas.altura);
+                    localStorage.setItem("peso",datas.peso);
+                    localStorage.setItem("medicamento",datas.medicamento);
+                    localStorage.setItem("observacion",datas.observacion);
+                    localStorage.setItem("cabeza",datas.cabeza);
+                    localStorage.setItem("resultado",datas.resultado);
+                    localStorage.setItem("estudio",datas.estudio);
+                    console.log('llegue Aca2')
                     return ({rdo:0,mensaje:"Ok"});//correcto
                 }
                 case 202:
@@ -76,80 +77,6 @@ export const registerBebe= async function(datas)
     };
 }
 
-export const guardarImgUser = async function(message)
-{
-    //url webservices
-    let url = urlWebServices.guardarImgUser;
-    //console.log("url",url);
-    //console.log("token",WebToken.webToken);
-    const formData = new URLSearchParams();
-    formData.append('email', message.email);
-    formData.append('nombreImagen',message.imagen);
-    
-    try
-    {
-        let response = await fetch(url,{
-            method: 'POST', // or 'PUT'
-            mode: "cors",
-            headers:{
-                'Accept':'application/x-www-form-urlencoded',
-                'x-access-token': localStorage.getItem('x'),
-                'Origin':'http://localhost:3000',
-                'Content-Type': 'application/x-www-form-urlencoded'},
-            body:formData
-        });
-        if (response.status===201)
-        {
-            return true;
-        }
-        else
-        {
-           return false; 
-        }
-    }
-    catch(error)
-    {
-        console.log("error",error);
-        return false;
-    };
-}
-
-export const uploadFileImg= async function(files,nombres)
-{
-     //url webservices
-     let url = urlWebServices.uploadFileImg;
-  
-    console.log('files', files)
-    console.log('nombres',nombres)
-    const formData = new FormData();
-    //agrego archivos para subir
-    for (let i = 0; i < files.length; i++)
-    {
-        formData.append('files', files[i], nombres[i])
-    }
-   
-    try
-    {
-        let response = await fetch(url,{
-            method: 'POST', // or 'PUT'
-            mode: "cors",
-            headers:{
-                'Accept':'application/form-data',
-                'x-access-token': localStorage.getItem('x'),
-                'Origin':'http://localhost:3000',
-                //'Content-Type': 'application/form-data'
-            },
-            body:formData
-        });
-    
-        let archivos = await response.json()
-        console.log('respuestaUpload', archivos);
-        return archivos;
-    } catch (err) {
-        alert('Error uploading the files')
-        console.log('Error uploading the files', err)
-    }
-}
 export const getBebesByUser = async function()
 {
     let url = urlWebServices.getBebesInicio;
@@ -218,41 +145,104 @@ export const getBebesByUserAndName = async function(datos)
             console.log("Traemos Bebe DATA",data);
             let listaBebe = data.data.docs;
             localStorage.setItem("ActualBebe",JSON.stringify(listaBebe));
-            let aname
-            let sexo
-            let peso
-            let altura
-            let enfermedad
-            let alergias
-            let fecha
-            let sangre
-            let cabeza
-            listaBebe.map((bebe) => {
-                 aname=bebe.name
-                 sexo=bebe.sexo
-                 peso=bebe.peso
-                 altura=bebe.altura
-                 enfermedad=bebe.enfermedad
-                 alergias=bebe.alergias
-                 fecha=bebe.fecha
-                 sangre=bebe.sangre
-                 cabeza=bebe.cabeza
-                })
-                localStorage.setItem("ActualBebeName",aname);
-                localStorage.setItem("ActualBebeSexo",sexo);
-                localStorage.setItem("ActualBebePeso",peso);
-                localStorage.setItem("ActualBebeAltura",altura);
-                localStorage.setItem("ActualBebeEnfermedad",enfermedad);
-                localStorage.setItem("ActualBebeAlergia",alergias);
-                localStorage.setItem("ActualBebeFecha",fecha);
-                localStorage.setItem("ActualBebeSangre",sangre);
-                localStorage.setItem("ActualBebeCabeza",cabeza);
             return listaBebe;
         }
         else
         {
             let vacio=[];
             console.log("No hay bebes")
+            return (vacio);
+            
+        }
+    }
+    catch(error)
+    {
+        console.log("error",error);
+    };
+}
+
+export const getControlesByBebe = async function()
+{
+    let url = urlWebServices.getControles;
+    const formData = new URLSearchParams();
+    formData.append('email', localStorage.getItem('email'));
+    formData.append('name',localStorage.getItem('ActualBebeName'))
+    
+    try
+    {
+        let response = await fetch(url,{
+            method: 'PUT', // or 'PUT'
+            mode: "cors",
+            headers:{
+                'Accept':'application/x-www-form-urlencoded',
+                'x-access-token': localStorage.getItem('x'),
+                'Origin':'http://localhost:3000',
+                'Content-Type': 'application/x-www-form-urlencoded'},
+            body:formData
+        });
+        if (response.status===200)
+        {
+            let data = await response.json();
+            console.log("imagenesUser",data);
+            let listaControl = data.data.docs;
+            let nombres= []
+            let controles=[]
+            const nombre= listaControl.map((control) => {
+                nombres.push(control.fecha_control)
+                controles.push(control)
+            })
+            localStorage.setItem("Controles",JSON.stringify(nombres));
+            localStorage.setItem("ControlesFull",JSON.stringify(controles));
+            return listaControl;
+        }
+        else
+        {
+            let vacio=[];
+            console.log("No hay Controles")
+            return (vacio);
+            
+        }
+    }
+    catch(error)
+    {
+        console.log("error",error);
+    };
+}
+export const getControlesByFecha = async function()
+{
+    let url = urlWebServices.getControles;
+    const formData = new URLSearchParams();
+    formData.append('email', localStorage.getItem('email'));
+    formData.append('name',localStorage.getItem('ActualBebeName'))
+    
+    try
+    {
+        let response = await fetch(url,{
+            method: 'PUT', // or 'PUT'
+            mode: "cors",
+            headers:{
+                'Accept':'application/x-www-form-urlencoded',
+                'x-access-token': localStorage.getItem('x'),
+                'Origin':'http://localhost:3000',
+                'Content-Type': 'application/x-www-form-urlencoded'},
+            body:formData
+        });
+        if (response.status===200)
+        {
+            let data = await response.json();
+            console.log("imagenesUser",data);
+            let listaControl = data.data.docs;
+            let nombres= []
+            const nombre= listaControl.map((control) => {
+                nombres.push(control.fecha_control)
+            })
+            localStorage.setItem("Controles",JSON.stringify(nombres));
+            return listaControl;
+        }
+        else
+        {
+            let vacio=[];
+            console.log("No hay Controles")
             return (vacio);
             
         }

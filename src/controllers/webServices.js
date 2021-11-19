@@ -11,7 +11,12 @@ const urlWebServices = {
     getImgUser: urlApi + "api/users/imgUserByMail",
     uploadFileImg: urlApi + "api/users/uploadImg",
     guardarVacuna: urlApi + "api/vacuna",
-    getBebesInicio: urlApi + "api/users/bebe"
+    getVacunaProfile: urlApi + "api/vacuna",
+    getBebesInicio: urlApi + "api/users/bebe",
+    getBebesInicio: urlApi + "api/users/bebe",
+    getBebe: urlApi + "api/users/bebeName",
+    registerControl:urlApi + "api/control",
+    getControles:urlApi + "api/control"
 }
 
 export default urlWebServices;

@@ -5,6 +5,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import styles from './styles';
 import DatePicker from './Datepicker';
 import {registerBebe} from '../../controllers/registerBebeController'
+import {getBebesByUser} from '../../controllers/registerBebeController'
 import React, {Component} from 'react';
 
 
@@ -81,9 +82,10 @@ class FormRegristoHijo extends Component{
               enfermedad:this.state.enfermedad,
               sexo:this.state.sexo
             }
+            let getRegister2 = await getBebesByUser();
             let getRegister = await registerBebe(datos);
             if (getRegister.rdo===0 )
-            {
+            {              
               this.props.history.push("/");
             }
             if (getRegister.rdo===1)
