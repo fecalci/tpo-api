@@ -193,3 +193,43 @@ export const getBebesByUser = async function()
         console.log("error",error);
     };
 }
+
+export const getBebesByUserAndName = async function(datos)
+{
+    let url = urlWebServices.getBebesInicio;
+    const formData = new URLSearchParams();
+    formData.append('email', localStorage.getItem('email'));
+    formData.append('bebe', datos.bebe);  
+    try
+    {
+        let response = await fetch(url,{
+            method: 'PUT', // or 'PUT'
+            mode: "cors",
+            headers:{
+                'Accept':'application/x-www-form-urlencoded',
+                'x-access-token': localStorage.getItem('x'),
+                'Origin':'http://localhost:3000',
+                'Content-Type': 'application/x-www-form-urlencoded'},
+            body:formData
+        });
+        if (response.status===200)
+        {
+            let data = await response.json();
+            console.log("Traemos Bebe DATA",data);
+            let listaBebe = data.data.docs;
+            localStorage.setItem("ActualBebe",JSON.stringify(listaBebe));
+            return listaBebe;
+        }
+        else
+        {
+            let vacio=[];
+            console.log("No hay bebes")
+            return (vacio);
+            
+        }
+    }
+    catch(error)
+    {
+        console.log("error",error);
+    };
+}
