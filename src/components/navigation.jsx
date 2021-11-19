@@ -25,6 +25,7 @@ export const Navigation = (props) => {
     }
     traerBebeSeleccionado(datos);
     console.log(`Option selected:`, datos);
+    //window.location.reload(false)
 }
 
 

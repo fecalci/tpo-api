@@ -65,14 +65,17 @@ class FormRegistroControl extends Component{
             this.setState({ formValues2 });
           }
         
-          handleSubmit(event) {
-            event.preventDefault();
-            alert(JSON.stringify(this.state.formValues));
-          }
+        handleControles = () => {
+           this.handleControl()
+        };
 
-        handleChange = e => {
+        handleControl = async function() {
+            let getControles = await getControlesByBebe();
+            this.props.history.push('/controlVisualizar');
+        };
+
+          handleChange = e => {
             const { name, value } = e.target;
-            this.errorReset();
             this.setState({
                 [name]: value
             });
@@ -157,10 +160,10 @@ class FormRegistroControl extends Component{
                                     Fecha de Visita:
                                     </Typography>
                                     <DatePicker
-                                    name="fecha"
-                                    label="Fecha"
-                                    value={this.state.fecha_control}
-                                    onChange={this.handleChange}
+                                        name="fecha"
+                                        label="Fecha"
+                                        value={this.state.fecha_control}
+                                        onChange={this.handleChange}
                                     />
 
                                     <Typography
@@ -285,6 +288,16 @@ class FormRegistroControl extends Component{
                                     Agregar Control
                             </Button>
                     </form>
+                    <Button
+                                    variant="contained"
+                                    color="primary"
+                                    type="submit"
+                                    style={{ marginTop: 20 }}
+                                    className={this.props.classes.signInButton}
+                                    onClick={() => {this.handleControles()}}
+                                >
+                                    Ver Controles Pediatricos
+                    </Button>
             </div>   
         </div>
         );
