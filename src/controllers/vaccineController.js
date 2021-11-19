@@ -5,7 +5,7 @@ export const vaccine = async function(datos)
 {
     //url webservices
     let url = urlWebServices.guardarVacuna;
-    //console.log("url",url);
+    console.log("CREANDO VACUNA");
     //console.log("token",WebToken.webToken);
     const formData = new URLSearchParams();
     formData.append('email', datos.email);
@@ -30,6 +30,7 @@ export const vaccine = async function(datos)
         });
         if (response.status===201)
         {
+            localStorage.setItem("Vacunas", JSON.stringify(datos))           
             return true;
         }
         else
@@ -80,38 +81,41 @@ export const uploadFileImg= async function(files,nombres)
         console.log('Error uploading the files', err)
     }
 }
-export const getImagenesByUser = async function()
+
+export const getVacunasByUserAndBebe = async function(datos)
 {
-    //url webservices
-    let url = urlWebServices.getImgUser;
-    //console.log("url",url);
-    //console.log("token",WebToken.webToken);
+    let url=urlWebServices.getVacunaProfile;
     const formData = new URLSearchParams();
-    formData.append('email', localStorage.getItem('email'));
-    
+    formData.append('email', datos.email);
+    formData.append('bebe', datos.bebe);  
     try
     {
         let response = await fetch(url,{
-            method: 'POST', // or 'PUT'
+            method: 'PUT', // or 'PUT'
             mode: "cors",
             headers:{
                 'Accept':'application/x-www-form-urlencoded',
-                'x-access-token': localStorage.getItem('x'),
+                //'x-access-token': localStorage.getItem('x'),
                 'Origin':'http://localhost:3000',
                 'Content-Type': 'application/x-www-form-urlencoded'},
             body:formData
         });
         if (response.status===200)
         {
+            let listaVacuna = data.data.docs;
+            let vacunas= []
+            const vacuna= listaVacuna.map((vacuna) => {
+                vacunas.push(vacuna)
+            })
             let data = await response.json();
-            console.log("imagenesUser",data);
-            let listaImg = data.data.docs;
-            return listaImg;
+            console.log("Traemos Vacuna DATA",data);
+            localStorage.setItem("AllVacunas",JSON.stringify(data));
+            return listaVacuna;
         }
         else
         {
             let vacio=[];
-            console.log("No hay imagenes")
+            console.log("No hay bebes")
             return (vacio);
             
         }
