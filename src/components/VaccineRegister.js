@@ -17,7 +17,8 @@ class VaccineRegister extends Component {
             centro_vac:'',
             vacuna:'',
             dosis:'',
-            edad:'',            
+            edad:'',   
+            id:''         
         };
 
     }
@@ -31,7 +32,7 @@ class VaccineRegister extends Component {
           centro_vac:this.state.centro_vac,
           vacuna:this.state.vacuna,
           dosis:this.state.dosis,
-          edad:this.state.edad,
+          edad:this.state.edad
         }
         let crearVacuna = await vaccine(datos);
         if (crearVacuna)
@@ -113,13 +114,15 @@ class VaccineRegister extends Component {
                 <tbody className="tableRow">
                     {JsonData.rows.map((item,i) => (
                             <tr key={i}>                  
-                                {Array.from({ length:17 }).map((_,index) => (                      
-                                    <td className="vaccineText">
+                                {Array.from({ length:17 }).map((_,index) => (  
+                                    item.value[index]!=''?                 
+                                    <td className="vaccineText">                                                                            
                                             <Button className="whiteButtons" onClick={() =>{this.handleClick(item, index,i)}}>
                                             {item.value[index]}
-                                            </Button>                                                   
-                                    </td>
-                                    
+                                            </Button>                                                                                                                           
+                                    </td>:
+                                    <td className="vaccineText">                                                                                                                                                                                                  
+                                    </td>                                    
                                 ))}
                                 
                             </tr>

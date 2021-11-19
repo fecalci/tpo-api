@@ -10,7 +10,7 @@ const urlWebServices = {
     guardarImgUser: urlApi + "api/users/guardarImgUser",
     getImgUser: urlApi + "api/users/imgUserByMail",
     uploadFileImg: urlApi + "api/users/uploadImg",
-    guardarVacuna: urlApi + "api/",
+    guardarVacuna: urlApi + "api/vacuna",
     getBebesInicio: urlApi + "api/users/bebe"
 }
 

@@ -5,7 +5,7 @@ export const vaccine = async function(datos)
 {
     //url webservices
     let url = urlWebServices.guardarVacuna;
-    //console.log("url",url);
+    console.log("CREANDO VACUNA");
     //console.log("token",WebToken.webToken);
     const formData = new URLSearchParams();
     formData.append('email', datos.email);
