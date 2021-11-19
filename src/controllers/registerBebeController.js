@@ -150,12 +150,9 @@ export const uploadFileImg= async function(files,nombres)
         console.log('Error uploading the files', err)
     }
 }
-export const getImagenesByUser = async function()
+export const getBebesByUser = async function()
 {
-    //url webservices
-    let url = urlWebServices.getImgUser;
-    //console.log("url",url);
-    //console.log("token",WebToken.webToken);
+    let url = urlWebServices.getBebesInicio;
     const formData = new URLSearchParams();
     formData.append('email', localStorage.getItem('email'));
     
@@ -166,7 +163,7 @@ export const getImagenesByUser = async function()
             mode: "cors",
             headers:{
                 'Accept':'application/x-www-form-urlencoded',
-                'x-access-token': localStorage.getItem('x'),
+                //'x-access-token': localStorage.getItem('x'),
                 'Origin':'http://localhost:3000',
                 'Content-Type': 'application/x-www-form-urlencoded'},
             body:formData
@@ -175,13 +172,14 @@ export const getImagenesByUser = async function()
         {
             let data = await response.json();
             console.log("imagenesUser",data);
-            let listaImg = data.data.docs;
-            return listaImg;
+            let listaBebe = data.data.name;
+            localStorage.setItem("Bebes",listaBebe);
+            return listaBebe;
         }
         else
         {
             let vacio=[];
-            console.log("No hay imagenes")
+            console.log("No hay bebes")
             return (vacio);
             
         }
