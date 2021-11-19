@@ -1,9 +1,11 @@
 import { BrokenImageTwoTone } from "@material-ui/icons";
 import React from "react";
+import Button from "@material-ui/core/Button/index";
 
 export const Navigation = (props) => {
   //alert(localStorage.getItem('email'));
   if (localStorage.getItem('email')){
+    console.log("LOCAL",localStorage.getItem('email'));
       return ( <nav id='menu' className='navbar navbar-default navbar-fixed-top'>
       <div className='container'>
         <div className='navbar-header'>
@@ -55,8 +57,8 @@ export const Navigation = (props) => {
               </a>
             </li>    
             <li>
-              <a href='/' onClick="SignOutear()">
-                Sign out
+            <a href='/' className='page-scroll' onClick={() => { localStorage.clear() }}>
+                Sign Out
               </a>
             </li>          
           </ul>
@@ -65,6 +67,7 @@ export const Navigation = (props) => {
     </nav>
     )
   }
+  console.log("LOCAL2",localStorage.getItem('email'));
     return (
       <nav id='menu' className='navbar navbar-default navbar-fixed-top'>
         <div className='container'>
@@ -131,10 +134,5 @@ export const Navigation = (props) => {
         </div>
       </nav>
     )
-  }
 
-<script type="text/javascript">
-    function SignOutear () {
-      localStorage.clear()
-    }
-</script>
+  }
