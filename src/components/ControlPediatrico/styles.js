@@ -21,6 +21,10 @@ const styles = theme => ({
         margin:theme.spacing(2),
         padding:theme.spacing(1),
     },
+    divnav: {
+        marginTop:theme.spacing(10),
+        padding:theme.spacing(1),
+    },
 
     paper: {
         //display: 'flex',
@@ -76,6 +80,14 @@ const styles = theme => ({
         marginTop: 40,
         marginLeft:10,
         fontSize: 10,
+        textAlign: 'left'
+    },
+    titleVisual: {
+        marginBottom: 5,
+        color: '#20485d',
+        marginTop: 40,
+        marginLeft:10,
+        fontSize: 20,
         textAlign: 'left'
     },
     link:{

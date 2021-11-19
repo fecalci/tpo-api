@@ -18,20 +18,16 @@ export const Navigation = (props) => {
   function handleChange2(e){
     handleChange(e)    
     let datos = {
-      email: localStorage.getItem("email"),
-      bebe: e.target.value
+      email: localStorage.getItem("email"),name: e.target.value
     }
     traerBebeSeleccionado(datos);
-    console.log(`Option selected:`, e.target.value);
+    console.log(`Option selected:`, datos);
 }
 
 
- const traerBebeSeleccionado= async function(datos)
-
-  {
+ const traerBebeSeleccionado= async function(datos){
   let getbebe = await getBebesByUserAndName(datos);
-    
-  }
+}
 
   //alert(localStorage.getItem('email'));
   if (localStorage.getItem('email')){
@@ -72,7 +68,7 @@ export const Navigation = (props) => {
               </a>
             </li>
             <li>
-              <a href='/registro' className='page-scroll'>
+              <a href='/control' className='page-scroll'>
                 Control Pediatrico 
               </a>
             </li>  
