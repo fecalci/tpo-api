@@ -102,14 +102,14 @@ export const getVacunasByUserAndBebe = async function(datos)
         });
         if (response.status===200)
         {
+            let data = await response.json();
             let listaVacuna = data.data.docs;
             let vacunas= []
             const vacuna= listaVacuna.map((vacuna) => {
                 vacunas.push(vacuna)
             })
-            let data = await response.json();
             console.log("Traemos Vacuna DATA",data);
-            localStorage.setItem("AllVacunas",JSON.stringify(data));
+            localStorage.setItem("AllVacunas",JSON.stringify(listaVacuna));
             return listaVacuna;
         }
         else

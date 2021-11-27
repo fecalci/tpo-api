@@ -81,9 +81,9 @@ class FormRegristoHijo extends Component{
               alergias:this.state.alergias,
               enfermedad:this.state.enfermedad,
               sexo:this.state.sexo
-            }
-            let getRegister2 = await getBebesByUser();
+            }            
             let getRegister = await registerBebe(datos);
+            let getRegister2 = await getBebesByUser();
             if (getRegister.rdo===0 )
             {              
               this.props.history.push("/");

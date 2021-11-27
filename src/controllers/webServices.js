@@ -13,7 +13,6 @@ const urlWebServices = {
     guardarVacuna: urlApi + "api/vacuna",
     getVacunaProfile: urlApi + "api/vacuna",
     getBebesInicio: urlApi + "api/users/bebe",
-    getBebesInicio: urlApi + "api/users/bebe",
     getBebe: urlApi + "api/users/bebeName",
     registerControl:urlApi + "api/control",
     getControles:urlApi + "api/control"
