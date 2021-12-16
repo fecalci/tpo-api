@@ -27,7 +27,7 @@ class VaccineRegister extends Component {
     {        
         let datos = {
           email:localStorage.getItem("email"),
-          bebe:localStorage.getItem("bebe"),
+          bebe:localStorage.getItem("ActualBebeName"),
           fecha:this.state.fecha,
           centro_vac:this.state.centro_vac,
           vacuna:this.state.vacuna,
@@ -62,19 +62,19 @@ class VaccineRegister extends Component {
             confirmButtonText: 'Confirmar',
             showLoaderOnConfirm: true,
             preConfirm:() =>{
-                return[
+                console.log("i", i);
+                console.log("index", index);
+                console.log("item", item);
+                return[                
                 this.state.fecha= document.getElementById('swal-input1').value,
                 this.state.centro_vac= document.getElementById('swal-input2').value,
-                this.state.vacuna = item.value[index],
-                this.state.dosis=item.value["title"],
-                this.state.edad=item.value[i]
+                this.state.vacuna = JsonData.rows[index-1].value["title"],
+                this.state.dosis=item.value[index],
+                this.state.edad=item.value[0]
             ]},
             allowOutsideClick: () => !Swal.isLoading()
           }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                title: `Felicitaciones, vacuna agregada con éxito!`,
-              })
               this.handleclick2()
             }
           })

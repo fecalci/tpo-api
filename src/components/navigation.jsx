@@ -19,6 +19,7 @@ export const Navigation = (props) => {
   function handleChange2(e){
     handleChange(e)    
     setBebe(e.target.value);
+    handleChangeProfile()
     let datos = {
       email: localStorage.getItem("email"),
       name: e.target.value
@@ -29,12 +30,12 @@ export const Navigation = (props) => {
 }
 
 
-  function handleChangeProfile(e){   
-    let datos = {
+  function handleChangeProfile(){   
+    let datos2 = {
       email: localStorage.getItem("email"),
-      bebe: bebe
+      bebe: localStorage.getItem("ActualBebeName")
     }
-    getVacunasByUserAndBebe(datos);
+    getVacunasByUserAndBebe(datos2);
   }
 
 
@@ -69,11 +70,6 @@ export const Navigation = (props) => {
           id='bs-example-navbar-collapse-1'
         >
           <ul className='nav navbar-nav navbar-right'>
-            {/* <li>
-              <a href='#about' className='page-scroll'>
-                Nosotros
-              </a>
-            </li> */}
             <li>
               <a href='/char' className='page-scroll'>
                 Percentiles
@@ -90,7 +86,7 @@ export const Navigation = (props) => {
               </a>
             </li>  
             <li>
-              <a href='/profile' className='page-scroll' onClick={() => { handleChangeProfile() }}>
+              <a href='/profile' className='page-scroll'>
                 Perfil
               </a>
             </li> 
@@ -146,41 +142,21 @@ export const Navigation = (props) => {
             id='bs-example-navbar-collapse-1'
           >
             <ul className='nav navbar-nav navbar-right'>
-              {/* <li>
-                <a href='#about' className='page-scroll'>
-                  Nosotros
-                </a>
-              </li> */}
+            <li>
+              <a href='#about' className='page-scroll'>
+                Nosotros
+              </a>
+            </li>
               <li>
-                <a href='/char' className='page-scroll'>
-                  Percentiles
-                </a>
-              </li>
-              <li>
-                <a href='/registro' className='page-scroll'>
-                  Control Pediatrico 
-                </a>
-              </li>  
-              <li>
-                <a href='/vacreg' className='page-scroll'>
-                  Vacunacion
-                </a>
-              </li>  
-              {/* <li>
                 <a href='#contact' className='page-scroll'>
                   Contacto
                 </a>
-              </li> */}
+              </li>
               <li>
                 <a href='/login' className='page-scroll'>
                   Ingresar
                 </a>
-              </li>      
-              <li>
-                <a href='/profile' className='page-scroll'>
-                  Perfil
-                </a>
-              </li>           
+              </li>                
             </ul>
           </div>
         </div>

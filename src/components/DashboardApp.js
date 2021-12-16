@@ -18,6 +18,7 @@ class DashboardApp extends Component {
         bebeSexo:localStorage.getItem("ActualBebeSexo") ,
         bebePeso:localStorage.getItem("ActualBebePeso") ,
         bebeAltura:localStorage.getItem("ActualBebeAltura") ,
+        vacunas:JSON.parse(localStorage.getItem("AllVacunas"))
       };
 
   }
@@ -34,70 +35,19 @@ class DashboardApp extends Component {
         </Typography>      
     <Box sx={{ display: 'flex', justifyContent:'center', gap:'100px' }}>
       <Card component="main">
-                {this.state.bebe.map((item,i) => {
+                {this.state.vacunas.map((item) => {
                 return(
                   <div>
-                    <CardContent>
-                    <Typography 
-                    component="h1"
-                    variant="h10"
-                    className={this.props.classes.title}
-                    key={item} value={item}>
-                    </Typography>        
+                    <CardContent>                       
                   <Typography 
                   component="h1"
                   variant="h10"
                   className={this.props.classes.titleVisual}
-                  key={item} value={item}>
-                  Listado de alergias: {item.alergias}
-                  </Typography>
-                  <br></br>
-                  <Typography 
-                  component="h1"
-                  variant="h10"
-                  className={this.props.classes.titleVisual}
-                  key={item} value={item}>
-                  Listado de enfermedades: {item.enfermedad}
-                  </Typography>
-                  <br></br>
-                  <Typography 
-                  component="h1"
-                  variant="h10"
-                  className={this.props.classes.titleVisual}
-                  key={item} value={item}>
-                  Tamaño de cabeza: {this.state.bebeCabeza}
-                  </Typography>
-                  <br></br>
-                  <Typography 
-                  component="h1"
-                  variant="h10"
-                  className={this.props.classes.titleVisual}
-                  key={item} value={item}>
-                  Fecha de nacimiento: {this.state.bebeFecha}
-                  </Typography>
-                  <br></br>
-                  <Typography 
-                  component="h1"
-                  variant="h10"
-                  className={this.props.classes.titleVisual}
-                  key={item} value={item}>
-                  Tipo sanguineo: {this.state.bebeSangre}
-                  </Typography>
-                  <br></br>
-                  <Typography 
-                  component="h1"
-                  variant="h10"
-                  className={this.props.classes.titleVisual}
-                  key={item} value={item}>
-                  Sexo: {this.state.bebeSexo}
-                  </Typography>
-                  <br></br>
-                  <Typography 
-                  component="h1"
-                  variant="h10"
-                  className={this.props.classes.titleVisual}
-                  key={item} value={item}>
-                  Peso: {this.state.bebePeso}
+                  key={item} value={item}>  
+                  Vacuna :{item.dosis}, 
+                  Dosis :{item.vacuna},            
+                  Centro : {item.centro_vac}, 
+                  Fecha :{item.fecha.substring(0, 10)}
                   </Typography>
                   </CardContent>
                 </div>                                              
