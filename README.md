@@ -7,7 +7,7 @@
 + Federico Calciano
 
 ### Como utilizar esta aplicacion
-Node de estar en Version 14.17.6 o mayor para garantizar el correcto funcionamiento
+#### Node de estar en Version 14.17.6 o mayor para garantizar el correcto funcionamiento
 Entrar a la branch entregaFinal 
 Luego de haber clonado el repositorio:
 
